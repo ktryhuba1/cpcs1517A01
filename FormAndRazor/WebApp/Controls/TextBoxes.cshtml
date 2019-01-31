@@ -1,0 +1,80 @@
+﻿@{
+    //this file is processed PHYSICALLY from TOP to BOTTOM
+
+    Layout = "~/_Layout.cshtml";
+    Page.Title = "TextBoxes";
+
+    //capture the data returned to the web app (web server)
+    //this data is in strings
+    var leftside = Request.Form["leftinput"]; //if the control name does NOT exist, the result is null
+    var rightside = Request.Form["rightinput"];
+    var thebutton = Request.Form["formbutton"];  //value attribute
+
+
+}
+@section banner{
+    <h1>TextBoxes</h1>
+}
+<!-- body content area-->
+<!-- processing logic-->
+@if (IsPost)
+{
+    if(thebutton.Equals("left"))
+    {
+        <p> Hello @leftside . How are you today?</p>
+    }
+    else if (thebutton.Equals("right"))
+    {
+        <p> I see your favourite color is @rightside .</p>
+    }
+    else //reset case
+    {
+        leftside = "";
+        rightside = "";
+    }
+}
+else
+{
+    // any initialize logic to fill any of your
+    // form controls
+    <p>Enter the request information.</p>
+}
+<!-- form-->
+    <form id="theform" method="post">
+        <div class="row">
+            <div class="col-md-6">
+                <label for="leftinput">Your Name:</label>
+                <input type="text" id="leftinput" name="leftinput"
+                       placeholder="enter your name"
+                       value="@leftside" />
+                <button type="submit" id="formbutton" name="formbutton"
+                        value="left" class="btn">
+                    Press Left
+                </button>
+            </div>
+            <div class="col-md-6">
+                <label for="rightinput">Your Favourite Colour:</label>
+                <input type="text" id="rightinput" name="rightinput"
+                       placeholder="enter your colour"
+                       value="@rightside" />
+                <button type="submit" id="formbutton" name="formbutton"
+                        value="right" class="btn">
+                    Press Right
+                </button>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-offset-5">
+                <button type="submit" id="formbutton" name="formbutton"
+                        value="reset" class="btn">
+                    Reset
+                </button>
+            </div>
+        </div>
+    </form>
+
+@section footer{
+    &copy; CPSC1517 Nait 2019, all rights reserved
+}
+
+

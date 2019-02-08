@@ -1,29 +1,88 @@
 ﻿@{
-   
+
     Layout = "~/_Layout.cshtml";
     Page.title = "Exercise01";
     var name = "";
+    var foods = "";
 }
 
 @section pagetitle{<h1>Exercise01: Basic Form Processing</h1>}
+
+@if (IsPost)
+{
+    foods = Request.Form["mealchoice"];
+    name = Request.Form["name"];
+    var button = Request.Form["formbutton"];
+
+    if (button.Equals("reset"))
+    {
+        foods = "";
+        name = "";
+    }
+    else
+    {
+        if (string.IsNullOrEmpty(name) || string.IsNullOrEmpty(foods))
+        {
+            if (string.IsNullOrEmpty(name))
+            {
+                name = "";
+                <p><span style="color:orangered"><strong>Please, Give us your Name</strong></span></p>
+            }
+            if (string.IsNullOrEmpty(foods))
+            {
+                foods = "";
+                <p><span style="color:orangered"><strong>Please, Choose your Preferred Meat</strong></span></p>
+            }
+
+        }
+        else
+        {
+            <p>
+                I see you Preferr the following Meat:
+                <ul>
+                    @foreach (var meat in foods.Split(','))
+                    {
+                        <li>@meat</li>
+                    }
+                </ul>
+            </p>
+
+        }
+
+    }
+
+
+}
 
 
 <form id="EX01" method="post">
     <div class="row">
         <div class="col-md-3">
             <H3>Customer Name</H3>
-            <input value="@name" />
-
-
-
+            <input type="text" id="name" name="name"
+                   placeholder="Enter your Name"
+                   value="@name" />
         </div>
         <div class="col-9">
-
-
-
+            <label for="mealchoice">Choose your Preferred Meat.</label><br />
+            <input type="checkbox" id="mealchoice" name="mealchoice" value="Beef"
+                   @(Array.IndexOf(foods.Split(','), "Beef") >= 0 ? "checked" : "") />&nbsp;&nbsp;Beef<br />
+            <input type="checkbox" id="mealchoice" name="mealchoice" value="Chicken"
+                   @(Array.IndexOf(foods.Split(','), "Chicken") >= 0 ? "checked" : "") />&nbsp;&nbsp;Chicken<br />
+            <input type="checkbox" id="mealchoice" name="mealchoice" value="Vegan"
+                   @(Array.IndexOf(foods.Split(','), "Vegan") >= 0 ? "checked" : "") />&nbsp;&nbsp;Vegan<br />
         </div>
     </div>
-    <div class="row"></div>
-
-
+    <div class="row">
+        &nbsp;&nbsp;
+        <button type="submit" id="formbutton" name="formbutton"
+                value="submit" class="btn btn-primary">
+            Submit
+        </button>
+        &nbsp;&nbsp;
+        <button type="submit" id="formbutton" name="formbutton"
+                value="reset" class="btn">
+            Reset
+        </button>
+    </div>
 </form>

@@ -1,0 +1,24 @@
+﻿<div class="navbar navbar-default navbar-fixed-top">
+    <!-- branding area-->
+    <div class="navbar-header">
+        <a class="navbar-brand" style="font-size:x-large">
+            <strong>CPSC1517</strong>
+        </a>
+    </div>
+    <!-- menu root items-->
+    <ul class="nav navbar-nav">
+        <!-- menu root item-->
+        <li><a href="@Href("~/ExercisePages/index.cshtml")">Home</a></li>
+        <!--  dropdown menu (submenu) -->
+        <li class="dropdown">
+            <!-- place the dropdown root menu item at the root-->
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                Exercises <b class="caret"></b>
+            </a>
+            <!-- this unorderlist is the dropdown menu-->
+            <ul class="dropdown-menu">
+                <li><a href="@Href("~/ExercisePages/Exercise01.cshtml")">Exercise01</a></li>
+            </ul>
+        </li>
+    </ul>
+</div>

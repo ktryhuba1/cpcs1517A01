@@ -10,7 +10,8 @@
     <siteMapNode url="" title="SamplePages" description="">
       <siteMapNode url="~/SamplePages/FirstPage.aspx" title="Hello world" description="" />
       <siteMapNode url="~/SamplePages/BasicControls.aspx" title="Basic Controls" description="" />
-      
+      <siteMapNode url="~/SamplePages/JobApplication.aspx" title="formating/gridview" description="" />
+      <siteMapNode url="~/SamplePages/ContestEntry.aspx" title="Validation" description="" />
     </siteMapNode>
     
   </siteMapNode>

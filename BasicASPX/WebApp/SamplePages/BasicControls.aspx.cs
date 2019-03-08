@@ -136,7 +136,7 @@ namespace WebApp.SamplePages
             
 
             //any validation you want
-            if (string.IsNullOrEmpty(submitchoice)  || submitchoice == "0")
+            if (string.IsNullOrEmpty(submitchoice)  || submitchoice == "select...")
             {
                 OutputMessage.Text = "Enter a Choice please (between 1 and 4)";
             }
@@ -164,7 +164,7 @@ namespace WebApp.SamplePages
                 //CollectionList.SelectedValue = submitchoice;
 
                 //use the three preoperties for list control as a demo
-                DisplayDataReadOnly.Text = " " + CollectionList.SelectedItem.Text
+                DisplayDataReadOnly.Text = " - " + CollectionList.SelectedItem.Text
                     + " at index " + CollectionList.SelectedIndex
                     + " has the value of " + CollectionList.SelectedValue;
 

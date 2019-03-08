@@ -7,6 +7,8 @@ using System.Web.UI.WebControls;
 
 namespace WebApp.SamplePages
 {
+
+
     public partial class JobApplication : System.Web.UI.Page
     {
         public static List<GridViewData> gvcollection;

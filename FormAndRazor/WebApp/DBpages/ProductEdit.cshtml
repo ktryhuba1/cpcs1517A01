@@ -163,8 +163,7 @@
                                             + "WHERE ProductID = @9";
                 //execute: .execute() returns the number of rows affected
                 var rowsaffected = db.Execute(UPDATEcommand, productname);
-                db.Execute(UPDATEcommand, productname,
-               supplierid.Equals("0") ? null : supplierid,
+                db.Execute(UPDATEcommand, productname, supplierid.Equals("0") ? null : supplierid,
                categoryid.Equals("0") ? null : categoryid,
                string.IsNullOrEmpty(quantityperunit) ? null : quantityperunit,
                string.IsNullOrEmpty(unitprice) ? null : unitprice,

@@ -17,6 +17,100 @@
         </div>
     </div>
   
+    
+  <%--  place all the validation controls in one group
+        one may have multiple validation controls per field
+        fields can only support a single instance of a particular
+            validation control--%>
+    <%-- Required Validation --%>
+    <asp:RequiredFieldValidator ID="RequiredFieldFirstName" runat="server"
+        ErrorMessage="First Name is required." Display="None"
+         SetFocusOnError="true" ForeColor="Firebrick"
+         ControlToValidate="FirstName">
+    </asp:RequiredFieldValidator>
+    <asp:RequiredFieldValidator ID="RequiredFieldLastName" runat="server"
+        ErrorMessage="Last Name is required." Display="None"
+         SetFocusOnError="true" ForeColor="Firebrick"
+         ControlToValidate="LastName">
+    </asp:RequiredFieldValidator>
+    <asp:RequiredFieldValidator ID="RequiredFieldStreetAddress1" runat="server"
+        ErrorMessage="street Address1 is required." Display="None"
+         SetFocusOnError="true" ForeColor="Firebrick"
+         ControlToValidate="StreetAddress1">
+    </asp:RequiredFieldValidator>
+    <asp:RequiredFieldValidator ID="RequiredFieldCity" runat="server"
+        ErrorMessage="City is required." Display="None"
+         SetFocusOnError="true" ForeColor="Firebrick"
+         ControlToValidate="City">
+    </asp:RequiredFieldValidator>
+    <asp:RequiredFieldValidator ID="RequiredFieldPostalCode" runat="server"
+        ErrorMessage="Postal Code is required." Display="None"
+         SetFocusOnError="true" ForeColor="Firebrick"
+         ControlToValidate="PostalCode">
+    </asp:RequiredFieldValidator>
+    <asp:RequiredFieldValidator ID="RequiredFieldEmailAddress" runat="server"
+        ErrorMessage="Email Address is required." Display="None"
+         SetFocusOnError="true" ForeColor="Firebrick"
+         ControlToValidate="EmailAddress">
+    </asp:RequiredFieldValidator>
+    <asp:RequiredFieldValidator ID="RequiredFieldCheckAnswer" runat="server"
+        ErrorMessage="You did not supply an answer to the skill testing question." Display="None"
+         SetFocusOnError="true" ForeColor="Firebrick"
+         ControlToValidate="CheckAnswer">
+    </asp:RequiredFieldValidator>
+    
+    <%--Range
+        we do NOT have a sample control to do a range validation
+        for this demonstration, StreetAddress2 will be used
+        to demonstrate a Range Validation--%>
+    <asp:RangeValidator ID="RangeStreetAddress2" runat="server" 
+        ErrorMessage="Enter a value between 1 (strongly disagree) and 10 (strongly agree)"
+         Display="None" SetFocusOnError="true"  ForeColor="Firebrick"
+         ControlToValidate="StreetAddress2" MaximumValue="10" MinimumValue="1" Type="Integer">
+    </asp:RangeValidator>
+
+    <%-- RegularExpression (Regex)
+         you can create your own pattern or since most
+         general patterns have already be well developed,
+         search the net for the acceptable pattern--%>
+    <asp:RegularExpressionValidator ID="RegularExpressionPostalCode" runat="server"
+        ErrorMessage="Invalid postal code format eg T6Y7U8"
+        Display="None" SetFocusOnError="true"  ForeColor="Firebrick"
+         ControlToValidate="PostalCode"
+         ValidationExpression="[a-zA-Z][0-9][a-zA-Z][0-9][a-zA-Z][0-9]">
+    </asp:RegularExpressionValidator>
+     <asp:RegularExpressionValidator ID="RegularExpressionEmailAddress" runat="server"
+        ErrorMessage="Invalid email address"
+        Display="None" SetFocusOnError="true"  ForeColor="Firebrick"
+         ControlToValidate="PostalCode"
+         ValidationExpression="^\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$
+">
+    </asp:RegularExpressionValidator>
+
+    <%-- Compare --%>
+     <%-- Compare DataType--%>
+<%--    <asp:CompareValidator ID="CompareStreetAddress2" runat="server" 
+        ErrorMessage="Survey value needs to be a number"
+         Display="None" SetFocusOnError="true" ForeColor="Firebrick" ControlToValidate="StreetAddress2"
+        Type="Integer"></asp:CompareValidator>--%>
+      <%-- Compare to a constant value--%>
+    <asp:CompareValidator ID="CompareCheckAnswer" runat="server" 
+        ErrorMessage="Incorrect skill testing answer."
+         Display="None" SetFocusOnError="true" ForeColor="Firebrick" ControlToValidate="CheckAnswer"
+        Type="Integer" Operator="Equal" ValueToCompare="15"></asp:CompareValidator>
+      <%-- Compare to another control
+          for this example assume there is a confirm email field
+    <asp:CompareValidator ID="CompareConfirmEmailAddress" runat="server" 
+        ErrorMessage="Email Address not confirmed. retry."
+         Display="None" SetFocusOnError="true" ForeColor="Firebrick" ControlToValidate="ConfirmEmailAddress"
+        Type="String" Operator="Equal" 
+         ControlToCompare="EmailAddress">
+    </asp:CompareValidator>--%>
+    
+    <asp:ValidationSummary ID="ValidationSummary1" runat="server" 
+         HeaderText="Correct the following concerns and resubmit."
+         CssClass="alert alert-danger"/>
+
     <div class="row">
         <div class ="col-md-6">
             <fieldset class="form-horizontal">

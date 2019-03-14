@@ -35,7 +35,6 @@ namespace WebApp.SamplePages
                 {
                     //   yes: create/load entry; add to storage; display entries
                     Message.Text = "okay";
-
                 }
                 else
                 {

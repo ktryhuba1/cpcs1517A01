@@ -31,7 +31,8 @@ namespace NorthwindSystem.Data
         // 1 identity pkey on your sql table (default)
         //  [Key] assumes identity pkey ending in ID or Id
 
-
+        
+        
         // 2 a compound pkey on your sql table
         // [Key,Column(Order=n)] where n is the numeric value
         // of the physical order of the attribute in the key

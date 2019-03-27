@@ -59,7 +59,7 @@ namespace NorthwindSystem.Data
         //sample of a computed field on your sql
         //to annotate this property to be taken as a
         //    sql computed field use
-        // [DatabaseGenerated(DatabaseGeneratedOPtion.Computed)]
+        // [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
         // public decimal somecomputedsqlfield {get;set;}
 
         //creating a read only property that is NOT

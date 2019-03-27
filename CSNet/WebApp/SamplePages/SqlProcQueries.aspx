@@ -23,7 +23,47 @@
             </tr>
             <tr>
                 <td align="center">
-                    <asp:GridView ID="CategoryProductList" runat="server"></asp:GridView>
+                    <asp:GridView ID="CategoryProductList" runat="server" AutoGenerateColumns="False" AllowPaging="True" BorderStyle="None" CellPadding="5" CellSpacing="5" GridLines="Horizontal" OnPageIndexChanging="CategoryProductList_PageIndexChanging" PageSize="3" OnSelectedIndexChanged="CategoryProductList_SelectedIndexChanged">
+                        <AlternatingRowStyle BackColor="Silver" />
+                        <Columns>
+                            <asp:TemplateField>
+                                <ItemTemplate>
+                                    <asp:Label ID="ProductID" runat="server" Text='<%# Eval("ProductID") %>' Visible="false"></asp:Label>
+                                </ItemTemplate>
+                                <HeaderStyle BackColor="#33CCCC" Font-Bold="True" />
+                            </asp:TemplateField>
+                            <asp:TemplateField HeaderText="Product">
+                                <ItemTemplate>
+                                    <asp:Label ID="ProductName" runat="server" Text='<%# Eval("ProductName") %>'></asp:Label>
+                                </ItemTemplate>
+                                <HeaderStyle BackColor="#33CCCC" Font-Bold="True" />
+                                <ItemStyle HorizontalAlign="Left" />
+                            </asp:TemplateField>
+                            <asp:TemplateField HeaderText="QOH">
+                                <ItemTemplate>
+                                    <asp:Label ID="UIS" runat="server" Text='<%# Eval("UnitsInStock") %>'></asp:Label>
+                                </ItemTemplate>
+                                <FooterStyle BackColor="#33CCCC" Font-Bold="True" HorizontalAlign="Right" />
+                                <HeaderStyle BackColor="#33CCCC" />
+                            </asp:TemplateField>
+                            <asp:TemplateField HeaderText="Price ($)">
+                                <ItemTemplate>
+                                    <asp:Label ID="UnitPrice" runat="server" Text='<%# string.Format("{0:0.00}",Eval("UnitPrice")) %>'></asp:Label>
+                                </ItemTemplate>
+                                <HeaderStyle BackColor="#33CCCC" Font-Bold="True" HorizontalAlign="Right" />
+                            </asp:TemplateField>
+                            <asp:TemplateField HeaderText="DISC">
+                                <ItemTemplate>
+                                    <asp:CheckBox runat="server" ID="Discontinued" Checked='<%# Eval("Discontinued") %>' Enabled="false"/>
+                                </ItemTemplate>
+                            <HeaderStyle BackColor="#33CCCC" Font-Bold="True" HorizontalAlign="Center" />
+                            </asp:TemplateField>
+                            <asp:CommandField CausesValidation="False" SelectText="View" ShowSelectButton="True">
+                            <HeaderStyle BackColor="#33CCCC" />
+                            </asp:CommandField>
+                        </Columns>
+                        <PagerSettings FirstPageText="Start" LastPageText="End" Mode="NumericFirstLast" PageButtonCount="3" />
+                    </asp:GridView>
                 </td>
 
             </tr>

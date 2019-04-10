@@ -9,10 +9,12 @@ using System.Threading.Tasks;
 using NorthwindSystem.Data; //the .Data class
 using NorthwindSystem.DAL;  //the DAL context class
 using System.Data.SqlClient; //required for SqlParameter()
+using System.ComponentModel;
 #endregion
 
 namespace NorthwindSystem.BLL
 {
+    [DataObject]
     //the classes within the BLL are referred to as your interface
     //these classes will be called by your webapp
     //for ease of maintenance, each class will represent a specific
@@ -25,6 +27,7 @@ namespace NorthwindSystem.BLL
         //input: search argument value
         //output: results of the search -> a single Product record
         //this method is public
+        [DataObjectMethod(DataObjectMethodType.Select, false)]
         public Product Product_Get(int productid)
         {
             //connect to the appropriate context class to access the database
@@ -44,6 +47,7 @@ namespace NorthwindSystem.BLL
         //Obtain a list of all table records
         //input: none
         //output: List<T> where <T> is the appropriate data class (Product)
+        [DataObjectMethod(DataObjectMethodType.Select, false)]
         public List<Product> Product_List()
         {
             using (var context = new NorthwindContext())
@@ -61,6 +65,7 @@ namespace NorthwindSystem.BLL
         //arguments are specified using new SqlParameter(parametername, value)
         //each required argument needs a SqlParameter()
         //SqlParameter() needs a using clause System.Data.SqlClient
+        [DataObjectMethod(DataObjectMethodType.Select, false)]
         public List<Product> Product_GetByCategories(int categoryid)
         {
             using (var context = new NorthwindContext())

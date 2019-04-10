@@ -76,8 +76,14 @@ namespace WebApp.SamplePages
                     {
                         //        no results: bad, not found message
                         MessageLabel.Text = "No products found for request category";
+
                         //optionally: clear the previous successful data display
-                        CategoryProductList.DataSource = null;
+                        //CategoryProductList.DataSource = null;
+
+                        //if you have an EmptyDataTemplate, you can assign the
+                        //   empty dataset results to the GridView, 
+                        //the empty dataset will trigger the display of the template
+                        CategoryProductList.DataSource = results;
                         CategoryProductList.DataBind();
                     }
                     else
@@ -103,41 +109,41 @@ namespace WebApp.SamplePages
 
         protected void CategoryProductList_PageIndexChanging(object sender, GridViewPageEventArgs e)
         {
-            //we must understand whats happening
-            //the gridview uses the PageIndex to calc which row out of your data set to display
-            // all other rows are ignored
-            // when switching pages you MUST set the pageIndex prop
-            // data for the new pag Index will come from the 'e' perameter of this method
-
+            //the gridview uses the PageIndex to calculate which rows
+            //    out of your dataset to display; all other rows are 
+            //    ignored
+            //When switching pages, you MUST set the PageIndex property
+            //data for the new page index will come from the "e" parameter
+            //    of this method
             CategoryProductList.PageIndex = e.NewPageIndex;
 
-            //the second step is to refresh the dataset of the control
-            // this can be done by re-assigning the data set to the control
-            // since our data collection is comming from a database
-            // depending on the selected category we need to issue another call to the database
-            // then bind that data to the control
-
-
-            Submit_Click(sender,new EventArgs());
-
+            //the second step in this method is to refresh the dataset
+            //    of the control
+            //this can be done by reassigning the dataset to the control
+            //since our data collection is coming from the database
+            //    depending on the selected category; we need to issue
+            //    another call to the database; then bind that data to
+            //    the control.
+            Submit_Click(sender, new EventArgs());
         }
 
         protected void CategoryProductList_SelectedIndexChanged(object sender, EventArgs e)
         {
-            //accessing DATA on a GridView cell is dependant on the Web control Data type
-            //syntax for access (gvcontrolpointer.FindControl("CellcontrolID") as cellcontroltype).controlaccesstype
+            //accessing data on a gridview cell is dependent on the web control
+            //   datatype
+            //syntax:
+            // (gvcontrolpointer.FindControl("cellcontrolid") as cellcontroltype).controlaccesstype
+            // gvcontrolpointer: reference to the gridview row
+            // cellcontrolid: ID of the control in the cell
+            // cellcontroltype: type of web control in the cell
+            // controlaccesstype: how is the web control accessed
 
-            //gvcontrolpointer isreference to the gridview row
-            // cellcontrolID ID of teh control in the cell
-            // cellcontroltype type of web control in the cell
-            // controllaccesstype how is the web control accessed
+            //personal style
             GridViewRow agvrow = CategoryProductList.Rows[CategoryProductList.SelectedIndex];
-
-
-            string productid = (CategoryProductList.Rows[CategoryProductList.SelectedIndex].FindControl("ProductID") as Label).Text;
-            string productname = (CategoryProductList.Rows[CategoryProductList.SelectedIndex].FindControl("ProductName") as Label).Text;
+            string productid = (agvrow.FindControl("ProductID") as Label).Text;
+            string productname = (agvrow.FindControl("ProductName") as Label).Text;
             string discontinued = "";
-            if((agvrow.FindControl("Discontinued") as CheckBox).Checked)
+            if ((agvrow.FindControl("Discontinued") as CheckBox).Checked)
             {
                 discontinued = "discontinued";
             }

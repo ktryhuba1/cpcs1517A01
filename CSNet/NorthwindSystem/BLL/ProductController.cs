@@ -19,6 +19,7 @@ namespace NorthwindSystem.BLL
     //     data class ie. Product
     public class ProductController
     {
+        #region Queries
         //create a method to find a specific record on the sql table
         //this will be done by the primary key
         //input: search argument value
@@ -86,7 +87,6 @@ namespace NorthwindSystem.BLL
             }
         }
 
-      
         public List<Product> Products_GetBySupplierPartialProductName(int supplierid, string partialproductname)
         {
             using (var context = new NorthwindContext())
@@ -129,7 +129,114 @@ namespace NorthwindSystem.BLL
                 return results.ToList();
             }
         }
+        #endregion
+
+        #region Add, Update and Delete
+
+        //the Add method will be responsible for adding an instance
+        //   of product to the database (via DbSet<T>)
+        //input: instance of Product class
+        //output: optional, on a identity pkey, return the new pkey value
+        public int Product_Add(Product item)
+        {
+            //work will be done in a transaction block
+            using (var context = new NorthwindContext())
+            {
+                //step 1: Staging
+                //the appropriate DdSet will be used to add the instance <T>
+                //   to the database
+                //in this step, the data is NOT yet on the database
+                //if your pkey is an identity, then, the pkey value will NOT
+                //   be set
+                context.Products.Add(item);
+
+                //step 2: Commit add
+                //this command when executed will send your record to the
+                //    database for processing
+                //this command when executed will cause ANY entity validation
+                //    to fire
+                //if this command is not executed then your add is rolled back
+                //if this command is executed by fails then your add is rolled back
+                //if this command is executed and your database objects, then your
+                //   add is rolled back
+                //if this command is executed and no problems exist, your add will
+                //   be committed.
+                context.SaveChanges();
+
+                //optionally you can return your new pkey value
+                //if your data is committed then the new pkey value will be
+                //   in your instance <T> at this time
+                return item.ProductID;
+            }
+        }
+
+        //Update
+        //the update will receive an instance <T>
+        //the instance will have the pkey value
+        //the commit will return the number of rows affected
+        public int Product_Update(Product item)
+        {
+            using (var context = new NorthwindContext())
+            {
+                //optional:
+                //there could be an attribute(s) on your table
+                //    that track alternations to the database
+                //    record such as date of change, security id
+                //    of person making the change
+                //let us assume that there is an attribute on
+                //    the record which records the update date
+                //item.LastModified = DateTime.Now;
 
 
-    }
-}
+                //staging
+                //this update approach will update the entire
+                //    record on the data that matches
+                //    the pkey value of the instance
+                context.Entry(item).State = System.Data.Entity.EntityState.Modified;
+
+                //commit
+                //the execution returns the number of rows affected
+                return context.SaveChanges();
+            }
+        }
+
+        //Delete
+        //physical: will remove the record physically from the database
+        //logical: will usually set an attribute on the database record
+        //         indicating that the record should be ignored in
+        //         normal processing
+        //input: only the pkey value is required
+        //output: number of rows affected
+        public int Product_Delete(int productid)
+        {
+            using (var context = new NorthwindContext())
+            {
+                //physical
+                ////find record on database to delete
+                //var existing = context.Products.Find(productid);
+                ////remove the physical instance (staging)
+                //context.Products.Remove(existing);
+                ////commit
+                //return context.SaveChanges();
+
+                //logical
+                //find record on database to "delete"
+                var existing = context.Products.Find(productid);
+
+                //staging
+                //the attribute used to flag the records
+                //    as a logical delete SHOULD be set by
+                //    the controller method and NOT be relied
+                //    upon by the used
+                existing.Discontinued = true;
+                //existing.LastModied = DateTime.Now; as in update
+                //the staging for a logical delete is actually an
+                //   an update
+                context.Entry(existing).State = System.Data.Entity.EntityState.Modified;
+                //commit
+                return context.SaveChanges();
+            }
+        }
+        #endregion
+    }//eoc
+}//eon

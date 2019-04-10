@@ -60,7 +60,10 @@
                             Proc Query
                             </a></li>
                         <li><a runat="server" href="~/SamplePages/FilterSearches">
-                            filter Query
+                            Filter Searches
+                            </a></li>
+                         <li><a runat="server" href="~/SamplePages/ProductCRUD">
+                            CRUD
                             </a></li>
                     </ul>
                 </div>

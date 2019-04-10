@@ -89,6 +89,7 @@ namespace WebApp.NorthwindPages
             }
             catch (Exception ex)
             {
+                
                 errormsgs.Add(GetInnerException(ex).ToString());
                 LoadMessageDisplay(errormsgs, "alert alert-danger");
             }
